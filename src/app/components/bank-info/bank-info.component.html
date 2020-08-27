@@ -1,0 +1,96 @@
+<div class="login-container d-flex flex-column justify-content-center bg-primary">
+    <div class="container d-flex flex-row" [ngClass]="className">
+        <div class="w-100 d-flex flex-row justify-content-around">
+            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="w-25">
+                <div class="form-group">
+                    <label class="w-100">
+                        <p>Bank Name:</p>
+                        <select formControlName="bank" [ngClass]="{ 'is-invalid': submitted && f.bank.errors }"
+                            class="w-100">
+                            <option>Kotak Mahindra Bank</option>
+                            <option>Bank Of Baroda</option>
+                        </select>
+                        <div *ngIf="submitted && f.bank.errors" class="invalid-feedback">
+                            <div *ngIf="f.bank.errors.required">Bank Name is required</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="w-100">
+                        <p>State Name:</p>
+                        <select formControlName="state" (change)="onStateChange($event.target.value)"
+                            [ngClass]="{ 'is-invalid': submitted && f.state.errors }" class="w-100">
+                            <option></option>
+                            <option *ngFor="let state of states">{{ state.name }}</option>
+                        </select>
+                        <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                            <div *ngIf="f.state.errors.required">State is required</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="w-100">
+                        <p>District: </p>
+                        <select formControlName="district" [ngClass]="{ 'is-invalid': submitted && f.district.errors }"
+                            class="w-100">
+                            <option></option>
+                            <option *ngFor="let district of districts">{{ district }}</option>
+                        </select>
+                        <div *ngIf="submitted && f.district.errors" class="invalid-feedback">
+                            <div *ngIf="f.district.errors.required">District is required
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="w-100">
+                        <p>Branch Name:</p>
+                        <select formControlName="branch" [ngClass]="{ 'is-invalid': submitted && f.branch.errors }"
+                            class="w-100">
+                            <option>Kotak, Noida</option>
+                            <option>BOB, Noida</option>
+                        </select>
+                        <div *ngIf="submitted && f.branch.errors" class="invalid-feedback">
+                            <div *ngIf="f.branch.errors.required">Branch is required</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="w-100 p-3 bg-warning">Search</button>
+                </div>
+                <!-- <div *ngIf="errorMessage">
+                    <p class="text-center text-warning">Invalid Username or Password</p>
+                </div> -->
+            </form>
+
+            <h4 class="text-center">OR</h4>
+
+            <form [formGroup]="ifscForm" (ngSubmit)="onIFSCSubmit()" class="w-25">
+                <div class="form-group">
+                    <label class="w-100">
+                        <p>IFSC Code:</p>
+                        <input type="text" formControlName="ifsc"
+                            [ngClass]="{ 'is-invalid': ifscSubmitted && s.ifsc.errors }" class="w-100">
+                        <div *ngIf="ifscSubmitted && s.ifsc.errors" class="invalid-feedback">
+                            <div *ngIf="s.ifsc.errors.required">IFSC Code is required</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="w-100 p-3 bg-warning">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="visible" class="text-center">
+        <h3>Details: </h3>
+        <p>Bank Name: {{ result.bank }}</p>
+        <p>IFSC Code: {{ result.ifsc }}</p>
+        <p>Branch: {{ result.branchName }}</p>
+        <p>District: {{ result.district }}</p>
+        <p>State: {{ result.state }}</p>
+    </div>
+    <div *ngIf="errorMessage">
+        <p class="text-center">Not Found</p>
+    </div>
+</div>

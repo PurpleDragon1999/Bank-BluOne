@@ -1,0 +1,23 @@
+.side-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 5;
+}
+
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 1;
+}
+
+.content {
+    margin-top: 90px;
+}
+
+a:hover{
+    cursor: pointer;
+}
